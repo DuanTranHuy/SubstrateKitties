@@ -2,6 +2,12 @@
 
 pub use pallet::*;
 
+#[cfg(test)]
+mod mock;
+
+#[cfg(test)]
+mod tests;
+
 #[frame_support::pallet]
 pub mod pallet {
 	use frame_support::{pallet_prelude::*, traits::UnixTime};
@@ -32,6 +38,12 @@ pub mod pallet {
 		pub gender: Gender,
 		pub owner: AccountOf<T>,
 		pub create_at: u64,
+	}
+
+	impl<T: Config> sp_std::fmt::Display for Kitty<T> {
+		fn fmt(&self, f: &mut sp_std::fmt::Formatter<'_>) -> sp_std::fmt::Result {
+			write!(f, "(dna: {:?}, price: {:?}, gender: {:?}, owner: {:?})", self.dna, self.price, self.gender, self.owner)
+		}
 	}
 
 	// Enum declaration for Gender.
@@ -312,7 +324,7 @@ pub mod pallet {
 				owner: owner.clone(),
 				create_at: T::TimeProvider::now().as_secs(),
 			};
-
+			log::info!("kitty:{}", kitty);
 			let kitty_id = T::Hashing::hash_of(&kitty);
 
 			// Performs this operation first as it may fail
