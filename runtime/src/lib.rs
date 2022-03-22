@@ -270,6 +270,7 @@ impl pallet_sudo::Config for Runtime {
 /// Configure the pallet-template in pallets/template.
 impl pallet_template::Config for Runtime {
 	type Event = Event;
+	type WeightInfo = ();
 }
 
 parameter_types! {              // <- add this macro
@@ -347,6 +348,7 @@ mod benches {
 		[pallet_balances, Balances]
 		[pallet_timestamp, Timestamp]
 		[pallet_template, TemplateModule]
+		[pallet_kitties, Kitties]
 	);
 }
 
