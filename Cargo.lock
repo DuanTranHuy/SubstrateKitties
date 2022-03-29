@@ -3579,6 +3579,7 @@ dependencies = [
  "jsonrpc-core-client",
  "jsonrpc-derive",
  "node-template-runtime",
+ "pallet-kitties-rpc-runtime-api",
  "pallet-template-rpc",
  "pallet-template-rpc-runtime-api",
  "pallet-transaction-payment-rpc",

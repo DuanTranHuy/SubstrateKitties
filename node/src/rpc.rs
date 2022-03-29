@@ -34,6 +34,7 @@ where
 	C::Api: pallet_transaction_payment_rpc::TransactionPaymentRuntimeApi<Block, Balance>,
 	C::Api: BlockBuilder<Block>,
 	C::Api: pallet_template_rpc_runtime_api::SumStorageApi<Block>,
+	C::Api: pallet_kitties_rpc_runtime_api::KittyApi<Block>,
 	P: TransactionPool + 'static,
 {
 	use pallet_transaction_payment_rpc::{TransactionPayment, TransactionPaymentApi};

@@ -16,7 +16,7 @@ use pallet_kitties_rpc_runtime_api::KittyApi;
 
 #[rpc]
 pub trait KittyApi<BlockHash> {
-	#[rpc(name = "get_kitty_count")]
+	#[rpc(name = "getKitty_count")]
     fn get_kitty_count(&self, at: Option<BlockHash>) -> Result<u64>;
 	#[rpc(name = "get_kitty")]
     fn get_kitty_count(&self, at: Option<BlockHash>) -> Result<Kitty>;
