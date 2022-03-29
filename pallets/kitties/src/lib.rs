@@ -386,5 +386,16 @@ pub mod pallet {
 
 			Ok(())
 		}
+
+		pub fn get_kitty(kitty_id: &T::Hash) -> Result<Kitty<T>, Error<T>> {
+			match Self::kitties(kitty_id) {
+				Some(kitty) => Ok(kitty),
+				None => Err(<Error<T>>::KittyNotExist)
+			}
+		}
+
+		pub fn get_kitty_count() -> u64 {
+			Self::kitty_cnt()
+		}
 	}
 }

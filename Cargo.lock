@@ -3624,6 +3624,7 @@ dependencies = [
  "pallet-balances",
  "pallet-grandpa",
  "pallet-kitties",
+ "pallet-kitties-rpc-runtime-api",
  "pallet-randomness-collective-flip",
  "pallet-sudo",
  "pallet-template",
@@ -3915,6 +3916,16 @@ dependencies = [
  "sp-io",
  "sp-runtime",
  "sp-std",
+]
+
+[[package]]
+name = "pallet-kitties-rpc-runtime-api"
+version = "4.0.0-dev"
+dependencies = [
+ "pallet-kitties",
+ "parity-scale-codec 3.1.2",
+ "sp-api",
+ "sp-runtime",
 ]
 
 [[package]]
