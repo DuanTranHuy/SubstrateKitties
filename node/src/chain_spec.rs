@@ -4,9 +4,10 @@ use node_template_runtime::{
 };
 use sc_service::ChainType;
 use sp_consensus_aura::sr25519::AuthorityId as AuraId;
-use sp_core::{sr25519, Pair, Public};
+use sp_core::{sr25519, Pair, Public,  crypto::UncheckedInto};
 use sp_finality_grandpa::AuthorityId as GrandpaId;
 use sp_runtime::traits::{IdentifyAccount, Verify};
+use hex_literal::hex;
 
 // The URL for the telemetry server.
 // const STAGING_TELEMETRY_URL: &str = "wss://telemetry.polkadot.io/submit/";
@@ -36,6 +37,13 @@ pub fn authority_keys_from_seed(s: &str) -> (AuraId, GrandpaId) {
 	(get_from_seed::<AuraId>(s), get_from_seed::<GrandpaId>(s))
 }
 
+const AURA1: [u8; 32] = hex!("8e60409424909d8531ef70e17cd624640d9b4a193b9e801b453dbc7d3cde021c");
+const GRANPA1: [u8; 32] = hex!("da0162a9fb44250181cf8b4e7d066ec4b4ca4cb02d92c23d98450a33df7131c3");
+const AURA2: [u8; 32] = hex!("f6f9a336547e5de8104bc666f0e00a497528a55918a909c7674bee7ebd07ab73");
+const GRANPA2: [u8; 32] = hex!("1a060a340e669f5b16a8507952cb4a970444057cbde0b216abe661cd8845ebd8");
+const AURA3: [u8; 32] = hex!("04cb6cfc5a975b8e0f43ea296644cbc9331fb64ec0d0c47e878ff42d0a3afb07");
+const GRANPA3: [u8; 32] = hex!("9c8e156358f49a9ef522bc94f889349e3af0e6c904d90694d7a6f3a839a687e2");
+
 pub fn development_config() -> Result<ChainSpec, String> {
 	let wasm_binary = WASM_BINARY.ok_or_else(|| "Development wasm not available".to_string())?;
 
@@ -49,15 +57,14 @@ pub fn development_config() -> Result<ChainSpec, String> {
 			testnet_genesis(
 				wasm_binary,
 				// Initial PoA authorities
-				vec![authority_keys_from_seed("Alice")],
+				vec![(AURA1.unchecked_into(), GRANPA1.unchecked_into()), (AURA2.unchecked_into(), GRANPA2.unchecked_into()), (AURA3.unchecked_into(), GRANPA3.unchecked_into())],
 				// Sudo account
 				get_account_id_from_seed::<sr25519::Public>("Alice"),
 				// Pre-funded accounts
 				vec![
-					get_account_id_from_seed::<sr25519::Public>("Alice"),
-					get_account_id_from_seed::<sr25519::Public>("Bob"),
-					get_account_id_from_seed::<sr25519::Public>("Alice//stash"),
-					get_account_id_from_seed::<sr25519::Public>("Bob//stash"),
+					AURA1.into(),
+					AURA2.into(),
+					AURA3.into(),
 				],
 				true,
 			)

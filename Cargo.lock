@@ -3557,6 +3557,7 @@ dependencies = [
  "clap",
  "frame-benchmarking",
  "frame-benchmarking-cli",
+ "hex-literal",
  "jsonrpc-core",
  "node-template-runtime",
  "pallet-transaction-payment-rpc",
